@@ -4,16 +4,17 @@ var dbconn =  require('./routes/database/database');
 var request = require('request');
 var appdata = require('./appdata.json');
 
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 //main page
 app.get('/', function(req, res){
-    res.send("main page, linked with index.ejs");
+    res.send("index");
 });
 
 //login
