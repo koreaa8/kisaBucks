@@ -7,26 +7,33 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous">
+  crossorigin="anonymous">
 </script>
 <style>
-  html,body,h1,h2,h3,h4,h5,h6 {
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: "Roboto", sans-serif
   }
 </style>
 
 <body class="w3-white">
 
-    <div class="w3-top">
-        <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-          <a href="#home" class="w3-bar-item w3-button"><b>KISABUCKS</b> </a>
-          <!-- Float links to the right. Hide them on small screens -->
-          <div class="w3-right w3-hide-small">
-            <a href="#login" class="w3-bar-item w3-button">LOGIN</a>
-            <a href="#signup" class="w3-bar-item w3-button">SIGNUP</a>
-          </div>
-        </div>
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a href="#home" class="w3-bar-item w3-button"><b>KISABUCKS</b> </a>
+      <!-- Float links to the right. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <a href="#login" class="w3-bar-item w3-button">LOGIN</a>
+        <a href="#signup" class="w3-bar-item w3-button">SIGNUP</a>
       </div>
+    </div>
+  </div>
 
   <!-- Page Container -->
   <div class="w3-content w3-padding" style="max-width:1400px; height:-webkit-fill-available;">
@@ -38,17 +45,18 @@
       <div class="w3-third">
 
         <div class="w3-white w3-text-grey w3-card-4">
-          <div class="w3-display-container">
-            <div class="w3-display-left w3-container w3-text-black">
-              <h2>카페명</h2>
+            <div class="w3-container w3-text-black">
+              <h5>
+                <%=data.cafe_name%>
+              </h5>
             </div>
-
-            <img src="#사진" style="width:100%" alt="사진">
-
-          </div>
+            <div class="w3-container">
+              <img src=<%=data.cafe_pic%> style="width:100%" alt="사진">
+            </div>
+          
           <div class="w3-container">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-black"></i>위치</p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-black"></i>전화번호</p>
+            <p><i class="fa fa-map-marker fa-fw w3-margin-right w3-large w3-text-black"></i><%=data.cafe_loc%></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-black"></i><%=data.cafe_number%></p>
             <hr>
 
             <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-black"></i>위치지도</b></p>
@@ -67,19 +75,23 @@
       <div class="w3-twothird">
 
         <div class="w3-container w3-card w3-white w3-margin-bottom">
-          <h4 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-black"></i>메뉴
+          <h4 class="w3-text-grey w3-padding-16"><i class="fa fa-coffee fa-fw w3-margin-right w3-xxlarge w3-text-black"></i>메뉴
             목록</h4>
+          
+    <!--for문으로 돌릴 예정 ajax 들어갈 부분-->
+        <% menudata.forEach(function(menu){  %>
           <div class="w3-container">
-            <div class="w3-display-container">
-              <div class="w3-display-left">메뉴명</div>
-              <div class="w3-display-right">가격 </div>
-              <!--for문으로 돌릴 예정 ajax 들어갈 부분-->
+              <div class="w3-display-container">
+                <div class="w3-display-left"><%=menu.name%></div>
+                <div class="w3-display-right"><%=menu.price%></div>
+              
+              </div>
+              <hr>
             </div>
-            <hr>
-          </div>
-         
-        </div>
+        <% }); %>
+          
 
+        </div>  
         <!-- End Right Column -->
       </div>
 
@@ -90,10 +102,10 @@
   </div>
 
   <footer class="w3-center w3-black w3-padding-16">
-      <!--<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>-->
-      <p>Copyright (c) KISABUCKS All rights reserved. <br>본 사이트에서 사용된 리소스는 모두 오픈소스임을 밝힙니다</p>
-    </footer>
-    
+    <!--<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>-->
+    <p>Copyright (c) KISABUCKS All rights reserved. <br>본 사이트에서 사용된 리소스는 모두 오픈소스임을 밝힙니다</p>
+  </footer>
+
 
 </body>
 
