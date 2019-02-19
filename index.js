@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var dbconn =  require('./routes/database/database');
 var request = require('request');
+var appdata = require('./appdata.json');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
