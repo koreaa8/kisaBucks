@@ -29,6 +29,11 @@ app.get('/login', function(req,res){
     res.render('login');
 });
 
+app.get('/payment', function(req,res){
+    res.render('payment');
+});
+
+
 //signup
 app.get('/signup', function (req, res) {
 
