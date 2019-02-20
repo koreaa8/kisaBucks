@@ -9,6 +9,8 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous">
 </script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56484f6049d78222ce116d7bf755b6c1&libraries=services,drawing"></script>
+
 <style>
   html,
   body,
@@ -36,7 +38,7 @@
   </div>
 
   <!-- Page Container -->
-  <div class="w3-content w3-padding" style="max-width:1400px; height:-webkit-fill-available;">
+  <div class="w3-content w3-padding" style="max-width:1400px; ">
 
     <!-- The Grid -->
     <div class="w3-row-padding w3-padding-64">
@@ -45,25 +47,61 @@
       <div class="w3-third">
 
         <div class="w3-white w3-text-grey w3-card-4">
-            <div class="w3-container w3-text-black">
-              <h5>
-                <%=data.cafe_name%>
-              </h5>
-            </div>
-            <div class="w3-container">
-              <img src=<%=data.cafe_pic%> style="width:100%" alt="사진">
-            </div>
-          
+          <div class="w3-container w3-text-black w3-padding">
+            <h3>
+              <%=data.cafe_name%>
+            </h3>
+          </div>
           <div class="w3-container">
-            <p><i class="fa fa-map-marker fa-fw w3-margin-right w3-large w3-text-black"></i><%=data.cafe_loc%></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-black"></i><%=data.cafe_number%></p>
+            <img src=<%=data.cafe_pic%> style="width:100%; height:400px" alt="사진">
+          </div>
+
+          <div class="w3-container">
+            <p><i class="fa fa-map-marker fa-fw w3-margin-right w3-large w3-text-black"></i>
+              <%=data.cafe_loc%>
+            </p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-black"></i>
+              <%=data.cafe_number%>
+            </p>
             <hr>
 
-            <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-black"></i>위치지도</b></p>
-
-            <div class="w3-light-grey w3-round-xlarge w3-small">
-              위치지도 보여줄 곳
+            <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-black"></i>지도</b></p>
+            <div class="w3-container">
+              <div id="map" style="width:100%; height:400px"> </div>
             </div>
+            <input type="hidden" id="lat" value=<%=data.cafe_lat%>></hidden>
+            <input type="hidden" id="lng" value=<%=data.cafe_lng%>></hidden>
+            <input type="hidden" id="locid" value=<%=data.cafe_locid%>></hidden>
+            
+            <script>
+              var lat = $("#lat").val();
+              var lng = $("#lng").val();
+              var locid = $("#locid").val();
+
+              console.log(lat, lng)
+              var container = document.getElementById('map');
+              var options = {
+                center: new daum.maps.LatLng(lat, lng),
+                level: 3
+              };
+
+              var map = new daum.maps.Map(container, options);
+
+              var marker = new daum.maps.Marker({
+                position: map.getCenter()
+              })
+
+              marker.setMap(map);
+
+              var loclink = '	http://map.daum.net/link/map/' + locid
+
+              daum.maps.event.addListener(marker,'click', function () {
+                window.open(loclink) 
+              });
+
+            </script>
+
+
             <br>
           </div>
         </div><br>
@@ -77,21 +115,25 @@
         <div class="w3-container w3-card w3-white w3-margin-bottom">
           <h4 class="w3-text-grey w3-padding-16"><i class="fa fa-coffee fa-fw w3-margin-right w3-xxlarge w3-text-black"></i>메뉴
             목록</h4>
-          
-    <!--for문으로 돌릴 예정 ajax 들어갈 부분-->
-        <% menudata.forEach(function(menu){  %>
-          <div class="w3-container">
-              <div class="w3-display-container">
-                <div class="w3-display-left"><%=menu.name%></div>
-                <div class="w3-display-right"><%=menu.price%></div>
-              
-              </div>
-              <hr>
-            </div>
-        <% }); %>
-          
 
-        </div>  
+          <!--for문으로 돌릴 예정 ajax 들어갈 부분-->
+          <% menudata.forEach(function(menu){  %>
+          <div class="w3-container">
+            <div class="w3-display-container">
+              <div class="w3-display-left">
+                <%=menu.name%>
+              </div>
+              <div class="w3-display-right">
+                <%=menu.price%>
+              </div>
+
+            </div>
+            <hr>
+          </div>
+          <% }); %>
+
+
+        </div>
         <!-- End Right Column -->
       </div>
 
@@ -105,7 +147,6 @@
     <!--<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>-->
     <p>Copyright (c) KISABUCKS All rights reserved. <br>본 사이트에서 사용된 리소스는 모두 오픈소스임을 밝힙니다</p>
   </footer>
-
 
 </body>
 

@@ -35,14 +35,15 @@ app.get('/signup', function (req, res) {
 });
 
 //cafe detail
-app.get('/detail/cafe', function (req, res) {
-    var sql = 'select * from cafe where cid = 2'
+app.get('/detail/cafe/:number', function (req, res) {
+    var sql = 'select * from cafe where cid = ?'
     dbconn.pool.getConnection(function (err, conn) {
         if (err) {
             console.error(err);
             throw err;
         } else {
-            conn.query(sql, function (err, result, fields) {
+            conn.query(sql, [req.params.number], function (err, result, fields) {
+                
                 var cafeData = result[0];
                 var cafeMenuData = JSON.parse(cafeData.cafe_menu);
                 delete cafeData.cafe_menu;
@@ -53,7 +54,9 @@ app.get('/detail/cafe', function (req, res) {
                 conn.release();
             })
         }
+
     })
+
 });
 
 //payment detail 
