@@ -3,7 +3,7 @@
 <title>KISABUCKS</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/indexstyle.css">
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -12,8 +12,8 @@
     <a href="#home" class="w3-bar-item w3-button"><b>KISABUCKS</b> </a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="#login" class="w3-bar-item w3-button">LOGIN</a>
-      <a href="#signup" class="w3-bar-item w3-button">SIGNUP</a>
+      <a href="login" class="w3-bar-item w3-button">LOGIN</a>
+      <a href="signup" class="w3-bar-item w3-button">SIGNUP</a>
     </div>
   </div>
 </div>
@@ -37,27 +37,39 @@
 
   <div class="w3-row-padding">
     <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Summer House</div>
-        <img src="images/cafe.jpg" alt="House" style="width:100%">
+      <div class="jhcontainer">
+        <div class="w3-display-topleft w3-black w3-padding"><%= results[0].cafe_name %></div>
+        <img class = "jhimage" src="<%= results[0].cafe_pic %>" alt="House">
+      
+        <div class = "jhmiddle">
+          <div class="jhtext"><a href="cafedetail" class="w3-bar-item w3-button">주문하러가기</a></div>
+        </div>
       </div>
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Brick House</div>
-        <img src="images/cafe.jpg" alt="House" style="width:100%">
+      <div class="jhcontainer">
+        <div class="w3-display-topleft w3-black w3-padding"><%= results[1].cafe_name %></div>
+        <img class = "jhimage" src="<%= results[1].cafe_pic %>" alt="House">
+      
+      <div class = "jhmiddle">
+        <div class="jhtext"><a href="cafedetail" class="w3-bar-item w3-button">주문하러가기</a></div>
       </div>
     </div>
+    </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Renovated</div>
-        <img src="images/cafe.jpg" alt="House" style="width:100%">
+      <div class="jhcontainer">
+        <div class="w3-display-topleft w3-black w3-padding"><%= results[2].cafe_name %></div>
+        <img class = "jhimage" src="<%= results[2].cafe_pic %>" alt="House" style="width:100%">
+      
+      <div class = "jhmiddle">
+        <div class="jhtext"><a href="cafedetail" class="w3-bar-item w3-button">주문하러가기</a></div>
       </div>
+    </div>
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
         <div class="w3-display-topleft w3-black w3-padding">Barn House</div>
-        <img src="images/cafe.jpg" alt="House" style="width:100%">
+        <img width="350px" height = "350px" overflow="hidden" src="images/cafe.jpg" alt="House" style="width:100%">
       </div>
     </div>
   </div>
