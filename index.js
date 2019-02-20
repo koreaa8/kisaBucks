@@ -55,7 +55,7 @@ app.get('/detail/cafe', function (req, res) {
 
 //payment detail 
 app.get('/payment', function (req, res) {
-
+    res.render('payment');
 });
 
 
