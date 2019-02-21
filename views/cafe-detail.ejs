@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Verdana'>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous">
@@ -19,7 +20,7 @@
   h4,
   h5,
   h6 {
-    font-family: "Verdana", sans-serif
+    font-family: "Verdana", "Nanum Myeongjo", sans-serif
   }
 </style>
 
@@ -127,10 +128,11 @@
           </div>
           <div class="w3-row-padding">
            <%data.forEach(function(menu, index){  %>
-            <div id="menu<%=index%>" class="w3-quarter w3-container w3-margin w3-card w3-center w3-hover-opacity">
-              <div class="w3-container w3-white" onclick="openDetail('<%=menu.mid%>')">
-                  <img src="<%=menu.menu_pic%>"  alt="coffee" style="width:90%; height:width">
-              
+            <div id="menu<%=index%>" class="w3-quarter w3-container w3-margin w3-card w3-center w3-hover-opacity" style="width:240px;">
+                <img src="<%=menu.menu_pic%>"  alt="coffee" style="width:100%; height:200px">
+                
+              <div class="w3-container w3-white w3-padding" onclick="openDetail('<%=menu.mid%>')">
+                
                 <p id="menu-name<%=index%>"><b>
                     <%=menu.menu_name%></b></p>
                 <p id="menu-price<%=index%>">
