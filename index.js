@@ -64,11 +64,16 @@ app.get('/', function (req, res) {
     }  
 });
 
+app.get('/location',function(req,res){
+    res.render('location');
+})
+
 app.post('/logout', function(req,res){
     signedin=0;
     console.log(signedin);
     res.json(1);
 })
+
 
 //signup
 app.get('/signup', function(req,res){
