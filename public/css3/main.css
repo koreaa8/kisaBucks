@@ -189,7 +189,7 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 1170px;
+  width: 970px;
   background: #fff;
   overflow: hidden;
   display: -webkit-box;
@@ -239,7 +239,7 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  padding: 303px 65px 40px 65px;
+  padding: 40px 65px 40px 65px;
 }
 
 .login100-form-title {
@@ -356,7 +356,7 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 3px;
-  background: #00ad5f;
+  background: #000;
 
   font-family: Montserrat-Bold;
   font-size: 12px;
