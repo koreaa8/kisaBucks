@@ -37,7 +37,7 @@
   </div>
 
   <!-- Page Container -->
-  <div class="w3-content w3-padding" style="max-width:1400px; ">
+  <div class="w3-content w3-padding" style="max-width:1400px;">
 
     <!-- The Grid -->
     <div class="w3-row-padding w3-padding-64">
@@ -128,24 +128,22 @@
           <div class="w3-row-padding">
            <%data.forEach(function(menu, index){  %>
             <div id="menu<%=index%>" class="w3-quarter w3-container w3-margin w3-card w3-center w3-hover-opacity">
-              <img src=""  alt="coffee" style="width:100%;">
-              <div class="w3-container w3-white" onclick="openDetail('<%=index%>')">
+              <img src="<%=menu.menu_pic%>"  alt="coffee" style="width:100%;">
+              <div class="w3-container w3-white" onclick="openDetail('<%=menu.mid%>')">
                 <p id="menu-name<%=index%>"><b>
                     <%=menu.menu_name%></b></p>
                 <p id="menu-price<%=index%>">
                   <%=menu.menu_price%>
                 </p>
+                
               </div>
             </div>
-            <input type="hidden" id="mid" value=<%=menu.mid%>></input>
             
             <% }); %> 
            
            <script>
               function openDetail(value) {
-              
-                var mid = $("#mid").val();
-                var url = 'http://localhost:3000/payment&mid=' + mid;
+                var url = 'http://localhost:3000/payment&mid=' + value;
 
                 window.location.href = url;
               }
