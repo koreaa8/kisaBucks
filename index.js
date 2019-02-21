@@ -264,34 +264,34 @@ app.get('/cafe/detail/:number', function (req, res) {
 });
 
 //payment detail 
+
 app.post('/withdraw', function (req, res) {
     // 결제 금액을 변수 값에 저장하고 있다가 출금이체 API를 통해 잔액을 그 값을 변수에 넣어서 빼주고 나머지 값을 DB에 저장하는식
-    console.log("/withdraw 에 들어왔음");
+    console.log(req.body.price);
     var getUserDataURI = 'https://testapi.open-platform.or.kr/transfer/withdraw'; // 토큰을 받을 수 있는 restful url
     var options = {
         url: getUserDataURI,
-        json : true,
-        method : 'POST',
+        json: true,
+        method: 'POST',
         headers: {
-            'Content-Type' : 'application/json; charset=UTF-8',
-            'Authorization' : 'Bearer '+accessKey
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ' + accessKey
         },
-        body : {
-            dps_print_content : '통장기재내용',//금결원의 내용과 똑같아야함
-            fintech_use_num : '199003892057724727972231', //조회하고자 하는 fintech_use_num을 입력
-            print_content : '통장기재내용',
-            tran_amt : 1000,// 출금금액
-            tran_dtime : '20190219131000'
+        body: {
+            dps_print_content: '통장기재내용', //금결원의 내용과 똑같아야함
+            fintech_use_num: '199003892057724727972231', //조회하고자 하는 fintech_use_num을 입력
+            print_content: '통장기재내용',
+            tran_amt: 1000, // 출금금액
+            tran_dtime: '20190219131000'
         }
     };
     request(options, function (err, response, body) {
-        if(err){
+        if (err) {
             console.error(err);
             throw err;
-        }
-        else {
-        
-        console.log(body);
+        } else {
+
+            console.log(body);
         }
     })
 });
