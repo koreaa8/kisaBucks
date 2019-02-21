@@ -164,6 +164,7 @@ app.post('/logincheck',function(req,res){
                     if(results.length > 0) {
                         if(results[0].user_pw == pw) {
                             console.log("성공")
+                            signedin = 1;
                             res.json(1);
                         } else {
                             res.send({
@@ -196,8 +197,10 @@ app.get('/payment', function(req,res){
 
 
 //cafe detail
-app.get('/detail/cafe/:number', function (req, res) {
-    var sql = 'select * from cafe where cid = ?'
+//cafe detail
+app.get('/cafe/detail/:number', function (req, res) {
+    var sql = 'select * from cafe join menu on cafe.cid = menu.cid where cafe.cid = ?'
+    
     dbconn.pool.getConnection(function (err, conn) {
         if (err) {
             console.error(err);
@@ -205,21 +208,17 @@ app.get('/detail/cafe/:number', function (req, res) {
         } else {
             conn.query(sql, [req.params.number], function (err, result, fields) {
                 
-                var cafeData = result[0];
-                var cafeMenuData = JSON.parse(cafeData.cafe_menu);
-                delete cafeData.cafe_menu;
-                res.render('cafe-detail', {
-                    data: cafeData,
-                    menudata: cafeMenuData
+
+                res.render("cafe-detail", {
+                    data : result
                 });
                 conn.release();
             })
         }
-
     })
 
+  
 });
-
 //payment detail 
 app.post('/withdraw', function (req, res) {
     // 결제 금액을 변수 값에 저장하고 있다가 출금이체 API를 통해 잔액을 그 값을 변수에 넣어서 빼주고 나머지 값을 DB에 저장하는식
