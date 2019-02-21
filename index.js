@@ -24,6 +24,48 @@ app.get('/', function (req, res) {
     res.send("index");
 });
 
+app.post('/logincheck',function(req,res){
+    var id = req.body.userID;
+    var pw = req.body.password;
+    console.log(id, pw)
+    dbconn.pool.getConnection(function(err,conn){
+        if(err){
+            console.error(err)
+            throw err
+        }
+        else{
+            conn.query("SELECT * FROM user WHERE user_id=?",[id], 
+            function(error, results, fields){
+                if (error){ 
+                    throw error;
+                }
+                else{
+                    console.log(results)
+                    if(results.length > 0) {
+                        if(results[0].user_pw == pw) {
+                            console.log("성공")
+                            res.json(1);
+                        } else {
+                            res.send({
+                                "code": 204,
+                                "success": "Email and password does not match"
+                            });
+                        }
+                    } else {
+                        res.send({
+                            "code":204,
+                            "success": "Email does not exists"
+                        });
+                    }
+                }    
+            }) 
+     
+                
+                }
+            })
+        }
+);
+
 //login
 app.get('/login', function(req,res){
     res.render('login');
