@@ -192,11 +192,49 @@ app.post('/logincheck',function(req,res){
         }
 );
 
+app.post('/menu', function (req, res) {
+    var sql = 'select * from menu where mid = ?'
+ 
+    dbconn.pool.getConnection(function (err, conn) {
+        if (err) {
+            console.error(err);
+            throw err;
+        } 
+        else {
+            conn.query(sql, [req.body.mid], function (err, result, fields) {
+                res.json(result);
+                conn.release();
+            })
+        }
+    })
 
 
-app.get('/payment', function(req,res){
-    res.render('payment');
+})
+
+app.get('/payment', function (req, res) {
+
+    var options = {
+        url: "http://localhost:3000/menu",
+        method: "POST",
+        form: req.query
+
+    };
+
+    request(options, function (error, response, body) {
+        if (error) {
+            console.error(error);
+            throw error;
+        }
+
+        else {
+            var menu = JSON.parse(body)
+            res.render('payment', {data : menu})
+        }
+
+    });
+
 });
+
 
 
 
