@@ -14,12 +14,12 @@
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-    <a href="#home" class="w3-bar-item w3-button"><b>KISABUCKS</b> </a>
+    <a href="/" class="w3-bar-item w3-button"><b>KISABUCKS</b> </a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
       <button class="w3-bar-item w3-button" id=logout>LOGOUT</button>
 
-      <a href="signup" class="w3-bar-item w3-button">SIGNUP</a>
+      <a href="mypage" class="w3-bar-item w3-button">MYPAGE</a>
     </div>
   </div>
 </div>
@@ -104,7 +104,7 @@
                 success: function (data) {
                     if(data == 1){
                         alert("logged out");
-                        window.location.href = "http://localhost:3000/index"  
+                        window.location.href = "http://localhost:3000/"  
                     }
                 }
         })

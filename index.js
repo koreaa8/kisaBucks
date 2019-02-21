@@ -258,7 +258,6 @@ app.get('/payment', function (req, res) {
 
 
 
-
 //cafe detail
 //cafe detail
 app.get('/cafe/detail/:number', function (req, res) {
