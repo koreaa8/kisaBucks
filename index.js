@@ -219,6 +219,7 @@ app.get('/cafe/detail/:number', function (req, res) {
 
   
 });
+
 //payment detail 
 app.post('/withdraw', function (req, res) {
     // 결제 금액을 변수 값에 저장하고 있다가 출금이체 API를 통해 잔액을 그 값을 변수에 넣어서 빼주고 나머지 값을 DB에 저장하는식
