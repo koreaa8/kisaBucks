@@ -68,6 +68,26 @@ app.get('/location',function(req,res){
     res.render('location');
 })
 
+app.get('/mypage',function(req,res){
+    dbconn.pool.getConnection(function(err,conn){
+        if(err){
+            console.error(err)
+            throw err
+        }
+        else{
+            var sql = 'SELECT * from memo'
+            conn.query(sql, function(error, results, fields){
+                if (error){ 
+                    throw error;
+                }
+                else{
+                    res.render('mypage', {results : results});
+                }
+            })
+        }
+    })    
+})
+
 app.post('/logout', function(req,res){
     signedin=0;
     console.log(signedin);
