@@ -18,10 +18,130 @@ var accessKey = "8fd73197-6356-45b7-b197-a219e9ae034b";//user의 accessKey로 �
 var refreash = "189cce5d-65c7-4daf-b6a5-3835626b3a0c";
 var userNum = "1100034731";//회원의 userNum으로 로그인
 
+var signedin= 0;
 
 //main page
 app.get('/', function (req, res) {
-    res.send("index");
+    if(signedin == 1)
+    {
+        dbconn.pool.getConnection(function(err,conn){
+            if(err){
+                console.error(err)
+                throw err
+            }
+            else{
+                var sql = 'SELECT cafe_name, cafe_pic from cafe'
+                conn.query(sql, function(error, results, fields){
+                    if (error){ 
+                        throw error;
+                    }
+                    else{
+                        res.render('loggedindex', {results : results});
+                    }
+                })
+            }
+        })    
+        
+    }
+    else{
+        dbconn.pool.getConnection(function(err,conn){
+            if(err){
+                console.error(err)
+                throw err
+            }
+            else{
+                var sql = 'SELECT cafe_name, cafe_pic from cafe'
+                conn.query(sql, function(error, results, fields){
+                    if (error){ 
+                        throw error;
+                    }
+                    else{
+                        res.render('index', {results : results});
+                    }
+                })
+            }
+        })
+    }  
+});
+
+app.post('/logout', function(req,res){
+    signedin=0;
+    console.log(signedin);
+    res.json(1);
+})
+
+//signup
+app.get('/signup', function(req,res){
+    res.render('signup');
+})
+
+app.post('/register',function(req,res){
+    var name = req.body.name;
+    var id = req.body.userID;
+    var pw = req.body.password;
+    var UN = req.body.use_num;
+    var AT = req.body.accessToken;
+
+    var sql = 
+    "INSERT INTO user (user_name, user_id, user_pw, user_accesstoken, user_userNum) VALUES (?,?,?,?,?)";
+    dbconn.pool.getConnection(function(err,conn){
+        if(err){
+            console.error(err)
+            throw err
+        }
+        else{
+            conn.query(sql, [name, id, pw, AT, UN], //authResult에서 나온 결과 저장
+                function (err, result){
+                    if(err){
+                        console.error(err);
+                        throw err;
+                    }
+                    else{
+                        console.log(result);
+                        conn.release();
+                        res.json(1);
+                    }
+                })
+            }
+        })
+});
+
+app.get('/authResult',function(req,res){
+    console.log(req.query.code);
+    console.log(req.query.scope);
+
+    var option = {
+        method : 'POST',
+        url : "https://testapi.open-platform.or.kr/oauth/2.0/token",
+        headers: {
+              "Content-type" : "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+    form : {
+        code : req.query.code,
+        client_id : "l7xx4460923980ef49c5a21acfaa60559817",
+        client_secret :"5034c3ad454c455aa3a48415ae34177d",
+        redirect_uri :"http://localhost:3000/authResult",
+        grant_type : "authorization_code"
+       }
+    };
+    console.log(option.form);
+    request(option, function(err, result, body){
+        if(err){
+            console.log(err);
+             throw new Error(error);
+        }
+        else {
+            console.log(body);
+            var authData = JSON.parse(body);
+            res.render('authComplete',{authData:authData});
+        }   
+    });
+})
+
+
+//login
+app.get('/login', function(req,res){
+    res.render('login');
 });
 
 app.post('/logincheck',function(req,res){
@@ -66,20 +186,14 @@ app.post('/logincheck',function(req,res){
         }
 );
 
-//login
-app.get('/login', function(req,res){
-    res.render('login');
-});
+
 
 app.get('/payment', function(req,res){
     res.render('payment');
 });
 
 
-//signup
-app.get('/signup', function (req, res) {
 
-});
 
 //cafe detail
 app.get('/detail/cafe/:number', function (req, res) {

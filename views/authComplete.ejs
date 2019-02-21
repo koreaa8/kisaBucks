@@ -1,0 +1,27 @@
+<table style="margin-top:220px">
+        <tr>
+            <td>accessToken</td><td id="accessToken"><%=authData.access_token%></td>
+        </tr>
+        <tr>
+            <td>refresh_token</td><td id="refresh_token"><%=authData.refresh_token%></td>
+        </tr>
+        <tr>
+            <td>user_seq_no</td><td id="user_seq_no"><%=authData.user_seq_no%></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="button" id="confirmBtn">확인</button></td>
+        </tr>
+    
+    </table>
+    <script>
+        opener.document.getElementById("accessToken").value = document.getElementById("access_token").textContent;
+        opener.document.getElementById("refreshToken").value = document.getElementById("refresh_token").textContent
+        opener.document.getElementById("userNum").value = document.getElementById("user_seq_no").textContent
+    
+    //     $("#confirmBtn").click(function () {
+    //     opener.document.getElementById("accessToken").value = document.getElementById("accessToken").textContent;
+    //     opener.document.getElementById("refreshToken").value = document.getElementById("refresh_token").textContent
+    //     opener.document.getElementById("userNum").value = document.getElementById("user_seq_no").textContent
+    //
+    // })
+    </script>
