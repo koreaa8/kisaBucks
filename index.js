@@ -314,6 +314,11 @@ app.post('/withdraw', function (req, res) {
         }
     })
 });
+
+app.post('/paid',function(req,res){
+    var paid = req.body.paid;
+    res.json(1);
+});
 //기본적인 url..? 포맷 넣어놨고 필요에 따라 추가하시면 될 것 같아요!
 
 var server = app.listen(3000, function () {
