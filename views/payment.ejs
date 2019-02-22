@@ -67,23 +67,27 @@ and is wrapped around the whole page content, except for the footer in this exam
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <img class="media-object" src="<%=data[0].menu_pic%>" style="width: 100px; height: 100px;">
-                                    </div>
-    
-                                </td>
-                                <td class="w3-centered">
-                                    <strong>
-                                        <%=data[0].menu_name%></strong>
-                                </td>
-                                <td><strong>1</strong></td>
-    
-                                <td><strong>
-                                        <%=data[0].menu_price%>원</strong></td>
-                            </tr>
-                        </tbody>
+                                <%data.forEach(function(menu, index){ %>
+                                    <tr>
+                                        <td>
+                                            <div class="media">
+                                                <img class="media-object" src="<%=menu.menu_pic%>" style="width: 100px; height: 100px;">
+                                            </div>
+            
+                                        </td>
+                                        <td class="w3-centered">
+                                           
+                                            <strong>
+                                                <%=menu.menu_name%></strong>
+                                        </td>
+                                        <td><strong>1</strong></td>
+            
+                                        <td><strong>
+                                                <%=menu.menu_price%>원</strong></td>
+            
+                                        <input type="hidden" class="totalprice" value="<%=menu.menu_price%>">
+                                    </tr>
+                                    <%});%>   </tbody>
                     </table>
                 </div>
     
@@ -97,7 +101,7 @@ and is wrapped around the whole page content, except for the footer in this exam
                         <div class="w3-container">
                             <div class="w3-xlarge">Total</div>
                             <div>
-                                <%=data[0].menu_price%>원
+                                    6800원
                             </div>
                             <!-- pay button -->
                             <p><button id="payment" class="w3-button w3-white w3-padding w3-border"><b>결제하기</b></button></p>
@@ -115,28 +119,6 @@ and is wrapped around the whole page content, except for the footer in this exam
         <!-- END w3-content -->
     
         <script>
-            var mid = $("#mid").val();
-            var menu;
-    
-            $.ajax({
-                url: 'http://localhost:3000/menu',
-                type: 'post',
-                async: false,
-                data: {
-                    "mid": mid
-                },
-    
-                success: function (result) {
-                    console.log(result[0])
-                    menu = result[0];
-                },
-    
-                error: function (request, status, error) {
-                    console.log(error);
-                }
-    
-            })
-
 
         $("#payment").click(function(){
             var paid = 1;

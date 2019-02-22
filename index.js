@@ -213,15 +213,26 @@ app.post('/logincheck',function(req,res){
 );
 
 app.post('/menu', function (req, res) {
-    var sql = 'select * from menu where mid = ?'
- 
+    var mid = req.body.mid.split(",");
+    console.log(mid.length)
+    var sql2 = ''
+    if (mid.length == 1){
+        var sql = "select * from menu where mid= ?"
+
+    }
+
+    else if (mid.length == 2){
+        var sql = "select * from menu where mid= ? or mid=?"
+
+    }
     dbconn.pool.getConnection(function (err, conn) {
-        if (err) {
+         if (err) {
             console.error(err);
             throw err;
         } 
         else {
-            conn.query(sql, [req.body.mid], function (err, result, fields) {
+            conn.query(sql, mid, function (err, result, fields) {
+                console.log(result)
                 res.json(result);
                 conn.release();
             })
@@ -232,12 +243,14 @@ app.post('/menu', function (req, res) {
 })
 
 app.get('/payment', function (req, res) {
-
+   console.log(req.query.mid.toString())
     var options = {
         url: "http://localhost:3000/menu",
         method: "POST",
-        form: req.query
+        form: {
+            'mid' : req.query.mid.toString()
 
+        }
     };
 
     request(options, function (error, response, body) {
@@ -256,9 +269,6 @@ app.get('/payment', function (req, res) {
 });
 
 
-
-
-//cafe detail
 //cafe detail
 app.get('/cafe/detail/:number', function (req, res) {
     var sql = 'select * from cafe join menu on cafe.cid = menu.cid where cafe.cid = ?'
